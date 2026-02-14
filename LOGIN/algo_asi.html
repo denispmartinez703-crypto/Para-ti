@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FOR YOU</title>
+    <link rel="stylesheet" href="algo_asi.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Hand:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="Imagen/flowers.png" />
+
+  </head>
+
+  <body>
+    <div id="escena-principal">
+      <div id="universo"></div>
+
+      <div class="mensaje-inicial">
+        <h1 id="texto-escrito" ></h1>
+        <button id="btn-magico">Presiona porfavor</button>
+      </div>
+
+      <div id="constelacion" class="oculto">
+        <svg id="svg-Lineas"></svg>
+        
+      </div>
+
+      <button id="btn-portal" >
+        Tengo algo más para ti...
+      </button>
+
+    </div>
+
+    <div id="modal-razon" class="modal oculto">
+      <div class="modal-contenido">
+        <span id="cerrar-modal" onclick= "cerrarModal()">&times;</span>
+        <img id="modal-imagen" src="" alt="Nuestra foto" />
+        <div id="modal-texto">
+          <p id="parrafo-1"></p>
+          <p id="parrafo-2"></p>
+          <p id="parrafo-3"></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="algo_asi.js"></script>
+  </body>
+</html>

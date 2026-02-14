@@ -1,0 +1,343 @@
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-size: 30px;
+    font-family: 'Cormorant Upright', serif;
+    text-align: center;
+    text-shadow: 0 0 8px #ffffff, 0 0 20px #c6d826;
+    margin-bottom: 30px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+}
+
+.mensaje-saliente {
+    opacity: 0 !important;
+    transform: translateY(-80px);
+}
+
+#escena-principal {
+    background: linear-gradient(to bottom, #050510 0%, #1e1e94 100%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+#svg-Lineas {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: 101vw;
+    height: 102vh;
+    z-index: 6; /* Nivel 1: Detrás de los puntos */
+    pointer-events: none; /* Importante: deja que los clics pasen a través de las líneas */
+    display: block !important;
+}
+
+/* Asegúrate de que tus puntos tengan un z-index mayor */
+
+
+#btn-magico {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #1418ee;
+    box-shadow: 0 0 12px #1418ee;
+    color: white;
+    border: none;
+    border-radius: 70px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 900;
+    position: relative;
+    opacity: 0;            /* Invisible al inicio */
+    visibility: hidden;    /* No se puede tocar mientras es invisible */
+    transition: opacity 1.5s ease; /* Aparecerá suavemente en 1.5 segundos */
+}
+
+/* Esta clase la activaremos con JavaScript */
+.btn-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+
+#btn-magico:hover {
+    transform: scale(1.100);
+    box-shadow: 0 0 12.1px #1418ee;
+}
+
+.oculto {
+    display: none !important;
+}
+
+/* Clase para el flash */
+
+
+.estrella-fondo {
+    position: absolute;
+    background-color: rgb(248, 228, 113);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: parpadeo infinite ease-in-out;
+}
+
+@keyframes parpadeo {
+    0%, 100% { opacity: 2; transform: scale(1); }
+    50% { opacity: 80; transform: scale(1.2); }
+}
+
+#universo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.mensaje-inicial {
+    z-index: 5;
+    text-align: center;
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+}
+
+
+
+/* Estilo para los puntos de la constelación */
+.punto-constelacion {
+    position: absolute;
+    width:15px;
+    height: 15px;
+    background-color: #ffffff;
+    border-radius: 60%;
+    cursor: pointer;
+    box-shadow:0 0 15px #ffffff, 0 0 25px #c6d826;
+    z-index: 10;
+    animation: parpadeo 4s infinite ease-out;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    transform:translate(-50%,-50%);
+    opacity: 0;
+    transition: opacity 3s ease-in;
+
+}
+
+.aparecer-suave {
+    opacity: 1 !important;
+}
+
+.punto-constelacion.visible {
+    opacity: 1 !important;
+}
+
+
+.punto-constelacion:hover {
+    transform: translate(-50%,-50%) scale(1.1);
+    box-shadow: 0 0 20px #ffffff, 0 0 30px #c6d826;
+}
+
+/* El cuadro flotante (Modal) */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(5, 28, 68, 0.685);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none; /* No se puede tocar */
+    transition: opacity 0.5s ease; /* Transición suave del fondo */
+}
+
+.modal-contenido {
+    background: rgb(0, 22, 61,0.685);
+    padding: 50px;
+    border-radius: 500px;
+    max-width: 350px;
+    width: 80%;
+    color: #ffffff;
+    position: relative;
+    text-align: center;
+    border: 2px solid #eeeeee; /* Grosor | Estilo | Color */
+    border-radius: 15px;       /* Esto redondea las esquinas */
+    max-height: 90vh; /* Limita la altura para que no ocupe toda la pantalla */
+    /* ESTADO INICIAL: Pequeño (Zoom Out) */
+    transform: scale(0.5);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
+}
+
+.modal.activo {
+    opacity: 1;
+    pointer-events: auto; /* Ahora se puede tocar */
+    transform: scale(1); /* Zoom In al aparecer */
+}
+
+
+.modal.activo .modal-contenido {
+    transform: scale(1); /* Crece a tamaño normal */
+}
+
+
+
+
+#modal-texto p{
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#parrafo-1 {
+    font-size: 45px; /* Un poco más pequeño para que quepa todo */
+    margin-bottom: 20px;
+    padding-top:10px ;
+    line-height: 1.5;
+    font-family: "Cormorant Upright", serif;
+    line-height: 35px;
+}
+
+#parrafo-2 {
+    font-size: 12px; /* Un poco más pequeño para que quepa todo */
+    margin-bottom: 3px;
+    line-height: 1.4;
+    padding-top: 3px;
+    
+}
+
+#parrafo-3 {
+    font-size: 12px; /* Un poco más pequeño para que quepa todo */
+    margin-bottom: 10px;
+    line-height: 1.4;
+    padding-top: 20px;
+}
+
+
+
+.modal-contenido img {
+    width: 100%;
+    max-height: 300px; /* Limita la altura para que no ocupe toda la pantalla */
+    object-fit: cover; /* Recorta la foto elegantemente para que llene el espacio */
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #d4d4d4; /* Un borde romántico */
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#cerrar-modal {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: #70a6f7;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 1px 10px rgba(185, 180, 235, 0.692);
+    transition: transform 0.2s;
+}
+
+#modal-img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#cerrar-modal:hover {
+    transform: scale(1.2) rotate(90deg);
+}
+
+
+/* --- ESTILO DE LA LLUVIA DE ESTRELLAS --- */
+.meteoro {
+    position: absolute;
+    top: -50px;
+    width: 2px;
+    height: 120px; /* Cola larga y elegante */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 222, 74, 0.8));
+    opacity: 0;
+    filter: drop-shadow(0 0 6px white);
+    animation: caerMeteoro 3s linear infinite; /* Caen infinitamente */
+    z-index: 1; /* IMPORTANTE: Detrás del corazón (que tiene z-index 10) */
+    pointer-events: none; /* Ignora los clics para no molestar */
+}
+
+@keyframes caerMeteoro {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) translateX(0) rotate(25deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(110vh) translateX(-200px) rotate(25deg);
+    }
+}
+
+
+
+/* --- ESTILO DEL BOTÓN PORTAL --- */
+#btn-portal {
+    position: fixed;
+    top: 15%;           /* Mantenemos la posición arriba del corazón */
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    
+    /* --- CAMUFLAJE Y ESTILO DORADO --- */
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    background: transparent;      /* Completamente transparente para camuflarse */
+    color: #f3e778;               /* Letras en amarillo suave */
+    border: 1px solid #ffeb3b;    /* Borde amarillo tipo estrella */
+    border-radius: 30px;
+    font-family: 'Cormorant Upright', serif;
+    cursor: pointer;
+    z-index: 100; /* Por debajo del corazón pero por encima de las líneas */
+    
+    /* Estado inicial */
+    opacity: 0; 
+    visibility: hidden;
+    pointer-events: none;
+    
+    /* Transición de 3 segundos igual al corazón */
+    transition: opacity 3s ease, transform 3s ease, visibility 0s linear 3s; 
+    
+    /* Brillo amarillo tipo neón */
+    box-shadow: 0 0 15px rgba(255, 235, 59, 0.3);
+}
+
+#btn-portal.aparecer-suave {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0); /* Baja suavemente a su lugar */
+    transition: opacity 3s ease, transform 3s ease, visibility 0s;
+}
+
+#btn-portal:hover {
+    color: #fffd7c;
+    box-shadow: 0 0 20px #efff94;
+}
